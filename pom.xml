@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.beastwall</groupId>
-    <artifactId>beast-engine</artifactId>
+    <artifactId>beast</artifactId>
     <version>0.0.1</version>
 
     <dependencies>
@@ -33,7 +33,7 @@
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/rasmi-aw/beast-engine</url>
+            <url>https://maven.pkg.github.com/Beastwall/beast</url>
         </repository>
     </distributionManagement>
 </project>
