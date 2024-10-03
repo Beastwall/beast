@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BeastHtmlEngine extends BeastEngine {
 
@@ -98,14 +99,9 @@ public class BeastHtmlEngine extends BeastEngine {
                     break;
                 case TAG_PREFIX + "router":
                     String route = ((String) context.get(TAG_PREFIX + "path")).trim();
-                    element.childNodes().stream().filter(child -> child.nameIs("route") && route.equalsIgnoreCase(child.attr("path").trim())).forEachOrdered(child -> {
-                        //
-                        try {
-                            result.append(renderComponent(child.attr("component").trim(), context, scopeIdentifier, child.attributes().hasKey("static"), resolvedVariables, engine));
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
+                    for (Node child : element.childNodes().stream().filter(child -> child.nameIs("route") && route.equalsIgnoreCase(child.attr("path").trim())).collect(Collectors.toSet())) {
+                        result.append(renderComponent(child.attr("component").trim(), context, scopeIdentifier, child.attributes().hasKey("static"), resolvedVariables, engine));
+                    }
                     break;
                 case TAG_PREFIX + "component":
                     String componentName = element.attr("name").trim();
