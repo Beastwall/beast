@@ -82,9 +82,10 @@ public abstract class BeastEngine {
         String cmp = components.get(name + ".component" + componentExtension());
         if (cmp == null) {
             if (TEMPLATES_PATH == null || TEMPLATES_PATH.trim().isEmpty()) {
-                TEMPLATES_PATH = "components";
+                TEMPLATES_PATH = "app";
             }
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(TEMPLATES_PATH + "/" + name + "/" + name + ".component" + componentExtension());
+            String path = name.trim().equals("app") ? TEMPLATES_PATH + "/" + name + ".component.html" : TEMPLATES_PATH + "/" + name + "/" + name + ".component" + componentExtension();
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
 
             if (inputStream == null) {
                 throw new RuntimeException("Couldn't find component: " + name + ".component" + componentExtension());
